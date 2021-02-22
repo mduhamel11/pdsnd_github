@@ -22,32 +22,32 @@ def get_filters():
     while city not in CITY_DATA.keys():
         print("\nWould you like to see data for Chicago, New York, or Washington? \n")
         city = input().lower()
-        
+
         if city not in CITY_DATA.keys():
             print("\nInvalid City! Please check your input and try again.")
-                 
-    
+
+
     # TO DO: get user input for month (all, january, february, ... , june)
     MONTH_DATA = {'january': 1, 'february': 2, 'march': 3, 'april': 4, 'may': 5, 'june': 6, 'all': 7}
     month = ''
     while month not in MONTH_DATA.keys():
         print("\nWhich month would you like to filter the data by? January through June, or type \"All\" for no filter.\n")
         month = input().lower()
-        
+
         if month not in MONTH_DATA.keys():
             print("\nInvalid Month! Please check your input and try again.")
-           
+
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     DAY_LIST = ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
     day = ''
     while day not in DAY_LIST:
         print("\nWhich day of the week would you like to filter the data by? (Type \"All\" for no filter.)\n")
         day = input().lower()
-        
+
         if day not in DAY_LIST:
             print("n\Invalid Day! Please check your input and try again.")
-      
-   
+
+
     print('-'*40)
     return city, month, day
 
@@ -66,7 +66,7 @@ def load_data(city, month, day):
     # load data for city
     print("\nLoading Data...")
     df = pd.read_csv(CITY_DATA[city])
-            
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
@@ -78,17 +78,17 @@ def load_data(city, month, day):
     if month != 'all':
           months = ['january','february','march','april','may','june']
           month = months.index(month) + 1
-          
+
           df = df[df['month'] == month]
-     
+
     # filter by day
     if day != 'all':
           # filter by day of week to create the new dataframe
-          df = df[df['day_of_week'] == day.title()] 
-          
-          
+          df = df[df['day_of_week'] == day.title()]
+
+
     return df
-          
+
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
@@ -165,7 +165,7 @@ def user_stats(df):
     # TO DO: Display counts of user types
     user_type = df['User Type'].value_counts()
     print(f"The types of users by number are given below:\n\n{user_type}")
-    
+
     # TO DO: Display counts of gender
     try:
         gender = df['Gender'].value_counts()
@@ -184,13 +184,13 @@ def user_stats(df):
         print(f"\nThe most common birth year is: {most_common}")
     except:
         print("There is no birth year information in this file!")
-        
-        
+
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-               
-        
-#To display raw data  
+
+
+#To display raw data
 #def rawdata(df):
  #   valid_responses = ["yes","no"]
   #  A1 = ''
@@ -205,7 +205,7 @@ def user_stats(df):
         #   print("Okay...Continuing")
 
 
-        
+
 def raw_data(df):
 #show raw data
     start_line = 0
@@ -220,7 +220,7 @@ def raw_data(df):
             show_data_end = input("More?: ").lower()
             if show_data_end == 'no':
                 break
-            
+
 
 def main():
     while True:
@@ -231,7 +231,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-		raw_data(df)
+		
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
@@ -240,4 +240,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
