@@ -1,5 +1,5 @@
 ### Date created
-02/22/2021
+Repository Created: 02/22/2021
 
 ### Project Title
 Github Project: Git Commands
@@ -16,3 +16,6 @@ washington.gitignore
 
 ### Credits
 Forked from https://github.com/udacity/pdsnd_github.git
+
+### Documentation Branch date created
+Documentation Branch created: 02/22/2021
